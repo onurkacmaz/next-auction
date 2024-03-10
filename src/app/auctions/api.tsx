@@ -17,3 +17,10 @@ export async function getAuction(id: number) {
 export async function getArtwork(id: number) {
   return config.axiosInstance.get(`artworks/${id}`)
 }
+
+export async function bid(artworkId: number, amount: number) {
+  return config.axiosInstance.post(`bids`, JSON.stringify({
+    artwork_id: artworkId,
+    amount: amount
+  }))
+}

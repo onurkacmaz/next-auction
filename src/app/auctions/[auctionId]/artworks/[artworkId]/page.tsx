@@ -7,7 +7,7 @@ import Menu from '@/app/components/menu'
 import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { fas } from '@fortawesome/free-solid-svg-icons'
-import { getArtwork } from '@/app/auctions/api'
+import { bid, getArtwork } from '@/app/auctions/api'
 
 const product = {
   name: 'Basic Tee 6-Pack',
@@ -97,6 +97,13 @@ export default function ArtworkDetail(props: any) {
 
   const prevImage = () => {
     setSelectedImage(selectedImage - 1)
+  }
+
+  const handleBid = () => {
+    bid(artworkId, artwork.end_price)
+    .then((response) => {
+      console.log(response)
+    })
   }
 
   const ImagePreview = () => {
@@ -226,17 +233,14 @@ export default function ArtworkDetail(props: any) {
                     {reviews.totalCount} reviews
                   </a>
                 </div>
-              </div>
-
-              <form className="mt-10">
-               
+              </div>               
                 <button
+                  onClick={() => handleBid()}
                   type="submit"
                   className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
-                  Add to bag
+                  Bid
                 </button>
-              </form>
             </div>
 
             <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
